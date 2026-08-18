@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>flkr — Beautiful images with verified true facts</title>
+<meta name="description" content="flkr is a pure visual feed of stunning photos paired with one verified true fact. No comments, no noise — just learn something beautiful every scroll.">
+<meta name="keywords" content="true facts, interesting facts, science facts, history facts, beautiful images, learn daily, Nigeria facts">
+<meta name="author" content="flkr">
+<link rel="canonical" href="https://flkr.app/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#050507">
+
+<link rel="preconnect" href="https://picsum.photos">
+<link rel="dns-prefetch" href="https://picsum.photos">
+
+<meta property="og:title" content="flkr — Beautiful images with verified true facts">
+<meta property="og:description" content="flkr is a pure visual feed of stunning photos paired with one verified true fact. No comments, no noise — just learn something beautiful every scroll.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flkr.app">
+<meta property="og:image" content="https://flkr.app/og-image.jpg">
+<meta property="og:site_name" content="flkr">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="flkr — Beautiful images with verified true facts">
+<meta name="twitter:description" content="flkr is a pure visual feed of stunning photos paired with one verified true fact. No comments, no noise — just learn something beautiful every scroll.">
+<meta name="twitter:image" content="https://flkr.app/og-image.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "flkr",
+  "url": "https://flkr.app/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://flkr.app/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "flkr",
+  "url": "https://flkr.app/",
+  "logo": "https://flkr.app/og-image.jpg"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Verified True Facts",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Octopuses have three hearts and blue copper-based blood.", "url": "https://flkr.app/#1"},
+    {"@type": "ListItem", "position": 2, "name": "A single cumulus cloud can weigh over a million pounds.", "url": "https://flkr.app/#2"},
+    {"@type": "ListItem", "position": 3, "name": "Trees talk through underground fungal networks called the Wood Wide Web.", "url": "https://flkr.app/#3"},
+    {"@type": "ListItem", "position": 4, "name": "Honey never spoils. Archaeologists ate 3,000-year-old honey from Egyptian tombs.", "url": "https://flkr.app/#4"},
+    {"@type": "ListItem", "position": 5, "name": "Wombat poop is cube-shaped to stop it rolling away.", "url": "https://flkr.app/#5"},
+    {"@type": "ListItem", "position": 6, "name": "The Amazon produces about 20% of Earth's oxygen.", "url": "https://flkr.app/#6"},
+    {"@type": "ListItem", "position": 7, "name": "Sharks have existed for 400 million years—before trees.", "url": "https://flkr.app/#7"},
+    {"@type": "ListItem", "position": 8, "name": "Bananas are berries, but strawberries aren't.", "url": "https://flkr.app/#8"},
+    {"@type": "ListItem", "position": 9, "name": "Lightning is five times hotter than the surface of the sun.", "url": "https://flkr.app/#9"},
+    {"@type": "ListItem", "position": 10, "name": "The immortal jellyfish can revert to childhood indefinitely.", "url": "https://flkr.app/#10"}
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#0b0c0f; --card:#11141a; --text:#e8ecf2; --muted:#9aa4b2;
+  --accent:#ff375f; --accent2:#0a84ff; --ring:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
+  background: radial-gradient(1200px 800px at 50% -10%, #162033 0%, #0b0c0f 60%);
+  color:var(--text); -webkit-font-smoothing:antialiased; overscroll-behavior-y:contain;
+}
+header{
+  position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; background:rgba(11,12,15,.7); backdrop-filter: blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{font-weight:800; letter-spacing:-.3px; font-size:22px}
+.logo span{opacity:.5; font-size:12px; margin-left:6px; font-weight:600; padding:2px 6px; border:1px solid rgba(255,255,255,.14); border-radius:8px}
+.header-actions{display:flex; gap:8px}
+.icon-btn{
+  position:relative; width:38px; height:38px; display:grid; place-items:center;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); border-radius:12px; color:#fff; font-size:18px;
+}
+.icon-btn:active{transform:scale(.96)}
+#heartToggle.active{color:var(--accent); border-color:rgba(255,55,95,.4); background:rgba(255,55,95,.12)}
+#likedCount{
+  position:absolute; top:-5px; right:-5px; min-width:18px; height:18px; padding:0 5px;
+  background:var(--accent); color:white; font-size:11px; font-weight:700; border-radius:9px; display:grid; place-items:center;
+  box-shadow:0 2px 6px rgba(255,55,95,.4);
+}
+#searchBar{padding:0 16px 12px; background:rgba(11,12,15,.7); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.04)}
+#searchBar input{
+  width:100%; max-width:480px; margin:0 auto; display:block; padding:12px 14px;
+  background:#0f131a; color:var(--text); border:1px solid rgba(255,255,255,.1); border-radius:14px; outline:none; font-size:15px;
+}
+#searchBar input:focus{border-color:var(--accent2); box-shadow:0 0 0 3px rgba(10,132,255,.2)}
+#chips{
+  display:flex; gap:8px; overflow-x:auto; padding:10px 16px; scrollbar-width:none;
+  background:linear-gradient(to bottom, rgba(11,12,15,.9), rgba(11,12,15,0));
+}
+#chips::-webkit-scrollbar{display:none}
+.chip{
+  padding:8px 14px; border-radius:999px; background:rgba(255,255,255,.06); color:var(--muted);
+  border:1px solid transparent; white-space:nowrap; font-size:14px; font-weight:500; transition:.2s;
+}
+.chip.active{background:rgba(255,55,95,.15); color:#ffc2cf; border-color:rgba(255,55,95,.3)}
+main{padding-bottom:90px}
+.card{
+  position:relative; width:calc(100% - 32px); max-width:440px; margin:18px auto;
+  aspect-ratio:3/4; border-radius:28px; overflow:hidden; background:var(--card);
+  box-shadow:0 20px 40px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.4); transform:translateZ(0);
+  touch-action:pan-y; user-select:none; -webkit-user-select:none;
+}
+.card img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .45s ease;
+}
+.card.loaded img{opacity:1}
+.scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.55) 28%, rgba(0,0,0,.2) 60%, transparent 85%);
+}
+.shimmer{
+  position:absolute; inset:0; z-index:2;
+  background:linear-gradient(110deg, #151a23 8%, #1e2533 18%, #151a23 33%);
+  background-size:200% 100%; animation:shimmer 1.4s linear infinite;
+}
+@keyframes shimmer{to{background-position:-200% 0}}
+.card.loaded .shimmer{opacity:0; transition:opacity .3s; pointer-events:none}
+.flag, .pin{
+  position:absolute; top:12px; width:34px; height:34px; display:grid; place-items:center;
+  border-radius:12px; background:rgba(0,0,0,.45); backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.8); font-size:16px; z-index:3;
+}
+.flag{right:12px}
+.pin{left:12px}
+.flag:active, .pin:active{transform:scale(.94)}
+.pin.active{background:rgba(10,132,255,.9); border-color:transparent; color:white}
+.fact-wrap{position:absolute; left:18px; right:18px; bottom:78px; z-index:3}
+.fact{
+  margin:0 0 10px; font-size:24px; line-height:1.25; font-weight:750; letter-spacing:-.2px;
+  text-shadow:0 2px 16px rgba(0,0,0,.7), 0 1px 2px rgba(0,0,0,.8);
+}
+.source{
+  display:inline-flex; gap:6px; align-items:center; font-size:13px; color:rgba(255,255,255,.78);
+  text-decoration:none; background:rgba(0,0,0,.38); padding:6px 10px; border-radius:10px; backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.08); max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.actions{
+  position:absolute; left:14px; right:14px; bottom:14px; display:flex; justify-content:space-between; align-items:center; z-index:3;
+}
+.like, .share{
+  display:flex; align-items:center; gap:6px; padding:10px 16px; border-radius:999px;
+  background:rgba(0,0,0,.52); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.14);
+  color:white; font-weight:650; font-size:15px; transition:transform .08s ease;
+}
+.like:active, .share:active{transform:scale(.96)}
+.like.active{background:rgba(255,55,95,.95); border-color:transparent; box-shadow:0 6px 18px rgba(255,55,95,.35)}
+.like .heart{font-size:18px; line-height:1; margin-top:-1px}
+.like em{font-style:normal; font-size:12.5px; opacity:.85; font-weight:600}
+.share{padding:10px 14px; font-size:18px}
+.card.ad{
+  aspect-ratio:16/9; display:grid; place-items:center; background:linear-gradient(135deg,#1a1f29,#0f131a);
+  border:1px dashed rgba(255,255,255,.18);
+}
+.ad-inner{text-align:center; padding:26px; color:#cdd6e3; position:relative; z-index:3}
+.ad-inner span{font-size:11px; letter-spacing:2px; opacity:.6}
+.ad-inner h3{margin:8px 0 4px; font-size:20px}
+.ad-inner p{margin:0; opacity:.75; font-size:14px}
+.toolbar{
+  width:calc(100% - 32px); max-width:440px; margin:18px auto 0;
+  display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:14px;
+}
+.toolbar button{padding:8px 12px; border-radius:10px; background:rgba(255,255,255,.08); color:white; border:1px solid rgba(255,255,255,.1); font-weight:600}
+.empty{text-align:center; padding:80px 20px; color:var(--muted)}
+footer{
+  position:fixed; bottom:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(11,12,15,.85); backdrop-filter:blur(12px); border-top:1px solid rgba(255,255,255,.06);
+  font-size:13px; color:var(--muted); z-index:40;
+}
+#adminLink{color:inherit; text-decoration:none; opacity:.5; padding:6px 8px; border-radius:8px; transition:.2s}
+#adminLink:hover{opacity:1; background:rgba(255,255,255,.06)}
+.toast{
+  position:fixed; left:50%; bottom:80px; transform:translateX(-50%) translateY(20px);
+  background:#11161f; color:white; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 10px 30px rgba(0,0,0,.5); opacity:0; transition:.25s; z-index:100; font-weight:600; font-size:14px; pointer-events:none;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+dialog#adminModal{
+  border:none; padding:0; background:#0f131a; color:white; border-radius:18px; max-width:720px; width:calc(100% - 32px);
+  box-shadow:0 30px 80px rgba(0,0,0,.7); overflow:hidden;
+}
+dialog::backdrop{background:rgba(0,0,0,.7); backdrop-filter:blur(4px)}
+#adminModal form{padding:0}
+#adminModal h2{margin:0 0 6px; font-size:20px}
+#adminModal p{margin:0 0 12px; color:var(--muted); font-size:14px}
+#adminJson, #adminAdsJson{
+  width:100%; height:34vh; background:#0b0e13; color:#cde2ff; border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; padding:12px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12.5px; resize:vertical;
+}
+.modal-actions{display:flex; gap:8px; margin-top:12px; align-items:center}
+.modal-actions button{padding:10px 14px; border-radius:10px; background:rgba(255,255,255,.08); color:white; border:1px solid rgba(255,255,255,.12); font-weight:600}
+#saveAdmin{background:var(--accent2); border-color:transparent}
+#resetAdmin{background:rgba(255,55,95,.15); color:#ffb8c6; border-color:rgba(255,55,95,.3)}
+.admin-tabs{display:flex;gap:4px;background:rgba(255,255,255,.06);padding:3px;border-radius:10px}
+.tab-btn{padding:6px 12px;border-radius:8px;border:none;background:transparent;color:var(--muted);font-weight:600;font-size:13px;cursor:pointer}
+.tab-btn.active{background:rgba(255,255,255,.14);color:white}
+.admin-pane{display:none}
+.admin-pane.active{display:block}
+dialog#passwordModal{
+  border:none; padding:0; background:#0f131a; color:white; border-radius:18px; max-width:360px; width:calc(100% - 32px);
+  box-shadow:0 30px 80px rgba(0,0,0,.7); overflow:hidden;
+}
+dialog#passwordModal form{padding:18px}
+dialog#passwordModal h2{margin:0 0 6px; font-size:20px}
+dialog#passwordModal p{margin:0 0 12px; color:var(--muted); font-size:14px}
+#adminPassword{
+  width:100%; padding:12px 14px; background:#0b0e13; color:var(--text); border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; outline:none; font-size:15px; margin-bottom:4px;
+}
+#adminPassword:focus{border-color:var(--accent2); box-shadow:0 0 0 3px rgba(10,132,255,.2)}
+#passwordSubmit{background:var(--accent2); border-color:transparent}
+button{font:inherit; cursor:pointer}
+@media (min-width:720px){
+  .fact{font-size:26px}
+  .card{margin:22px auto}
+}
+</style>
+</head>
+<body data-view="feed">
+<header>
+  <div class="logo">flkr <span>v9</span></div>
+  <div class="header-actions">
+    <button id="searchBtn" class="icon-btn" aria-label="Search">⌕</button>
+    <button id="heartToggle" class="icon-btn" aria-label="Liked">
+      ♥<span id="likedCount">0</span>
+    </button>
+  </div>
+</header>
+
+<div id="searchBar" hidden>
+  <input id="searchInput" type="search" placeholder="Search facts, sources, categories…">
+</div>
+
+<nav id="chips" aria-label="Categories">
+  <button class="chip active" data-cat="All">All</button>
+  <button class="chip" data-cat="Nature">Nature</button>
+  <button class="chip" data-cat="Science">Science</button>
+  <button class="chip" data-cat="History">History</button>
+  <button class="chip" data-cat="Culture">Culture</button>
+  <button class="chip" data-cat="Nigeria">Nigeria</button>
+  <button class="chip" data-cat="Tech">Tech</button>
+</nav>
+
+<main id="feed" aria-live="polite"></main>
+
+<footer>
+  <span id="daily">0 today</span>
+  <a href="#" id="adminLink" title="Admin JSON">admin</a>
+</footer>
+
+<dialog id="adminModal">
+  <form method="dialog">
+    <div style="padding:18px 18px 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px">
+        <h2 style="margin:0">Admin — flkr v9</h2>
+        <div class="admin-tabs">
+          <button type="button" class="tab-btn active" data-tab="facts">Facts</button>
+          <button type="button" class="tab-btn" data-tab="ads">Ads</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="factsPane" class="admin-pane active" style="padding:0 18px">
+      <p>Paste a JSON array. Each: { id, fact, source, url, category, img?, likes? }</p>
+      <textarea id="adminJson" spellcheck="false" placeholder='[{"id":1,"fact":"Octopuses have three hearts.","source":"Smithsonian","url":"https://...","category":"Nature","img":""}]'></textarea>
+    </div>
+    
+    <div id="adsPane" class="admin-pane" style="padding:0 18px">
+      <p>Pre-loaded Nigeria affiliate templates. Replace links with yours.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px">
+        <button type="button" id="addAdBtn" class="tab-btn" style="background:rgba(255,255,255,.08)">+ Add Ad</button>
+        <button type="button" id="removeAdBtn" class="tab-btn" style="background:rgba(255,255,255,.08)">– Remove Last</button>
+        <button type="button" id="resetNigeriaAds" class="tab-btn" style="background:rgba(10,132,255,.2);color:#9dd0ff">Reset to Nigeria samples</button>
+      </div>
+      <textarea id="adminAdsJson" spellcheck="false" placeholder='[{"id":"jumia1","title":"Jumia Nigeria","subtitle":"Sponsored — Shop phones & gadgets","img":"","link":"https://www.jumia.com.ng/your-affiliate-link"}]'></textarea>
+    </div>
+
+    <div style="padding:0 18px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+      <span id="adminCounts" style="font-size:12px;color:var(--muted)">0 facts, 0 ads loaded</span>
+    </div>
+
+    <div class="modal-actions" style="padding:12px 18px 18px">
+      <button id="resetAdmin" type="button">Reset to defaults</button>
+      <div style="flex:1"></div>
+      <button value="cancel">Close</button>
+      <button id="saveAdmin" type="button">Save All</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="passwordModal">
+  <form method="dialog">
+    <h2>Admin Access</h2>
+    <p>Enter password to edit custom facts</p>
+    <input id="adminPassword" type="password" placeholder="Password" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <div class="modal-actions">
+      <div style="flex:1"></div>
+      <button value="cancel">Cancel</button>
+      <button id="passwordSubmit" type="button">Unlock</button>
+    </div>
+    <div id="attemptsHint" style="margin-top:8px; font-size:12px; color:var(--muted); text-align:center; min-height:16px"></div>
+  </form>
+</dialog>
+
+<script>
+(() => {
+  const DEFAULT_FACTS = [
+{id:1,fact:"Octopuses have three hearts and blue copper-based blood.",source:"Smithsonian Ocean",url:"https://ocean.si.edu",category:"Nature",likes:342},
+{id:2,fact:"A single cumulus cloud can weigh over a million pounds.",source:"USGS",url:"#",category:"Nature",likes:198},
+{id:3,fact:"Trees talk through underground fungal networks called the Wood Wide Web.",source:"Nature Journal",url:"#",category:"Nature",likes:415},
+{id:4,fact:"Honey never spoils. Archaeologists ate 3,000-year-old honey from Egyptian tombs.",source:"National Geographic",url:"#",category:"Nature",likes:512},
+{id:5,fact:"Wombat poop is cube-shaped to stop it rolling away.",source:"BBC Earth",url:"#",category:"Nature",likes:267},
+{id:6,fact:"The Amazon produces about 20% of Earth's oxygen.",source:"WWF",url:"#",category:"Nature",likes:389},
+{id:7,fact:"Sharks have existed for 400 million years—before trees.",source:"American Museum of Natural History",url:"#",category:"Nature",likes:301},
+{id:8,fact:"Bananas are berries, but strawberries aren't.",source:"Kew Gardens",url:"#",category:"Nature",likes:224},
+{id:9,fact:"Lightning is five times hotter than the surface of the sun.",source:"NASA",url:"#",category:"Nature",likes:276},
+{id:10,fact:"The immortal jellyfish can revert to childhood indefinitely.",source:"Marine Biology",url:"#",category:"Nature",likes:345},
+{id:11,fact:"Cows have best friends and get stressed when separated.",source:"University of Northampton",url:"#",category:"Nature",likes:412},
+{id:12,fact:"Dolphins give each other unique whistled names.",source:"Science",url:"#",category:"Nature",likes:289},
+{id:13,fact:"There are more trees on Earth than stars in the Milky Way.",source:"Nature",url:"#",category:"Nature",likes:334},
+{id:14,fact:"The Mariana Trench is nearly 11km deep—Everest would fit inside.",source:"NOAA",url:"#",category:"Nature",likes:256},
+{id:15,fact:"Butterflies taste with their feet.",source:"Encyclopedia Britannica",url:"#",category:"Nature",likes:198},
+{id:16,fact:"Wood frogs freeze solid in winter, then thaw alive in spring.",source:"National Park Service",url:"#",category:"Nature",likes:221},
+{id:17,fact:"A blue whale's heart is the size of a small car.",source:"BBC",url:"#",category:"Nature",likes:378},
+{id:18,fact:"A day on Venus is longer than its year.",source:"NASA",url:"#",category:"Science",likes:445,img:"https://picsum.photos/id/11/800/1200"},
+{id:19,fact:"Sunlight takes 8 minutes 20 seconds to reach Earth.",source:"NASA",url:"#",category:"Science",likes:312},
+{id:20,fact:"Humans share about 50% of DNA with bananas.",source:"Genome Research",url:"#",category:"Science",likes:267},
+{id:21,fact:"Astronauts age slightly slower on the ISS due to relativity.",source:"NASA",url:"#",category:"Science",likes:298},
+{id:22,fact:"Water can boil and freeze at the same time at the triple point.",source:"Physics Today",url:"#",category:"Science",likes:189},
+{id:23,fact:"Your body contains roughly 7 octillion atoms.",source:"CERN",url:"#",category:"Science",likes:234},
+{id:24,fact:"Trillions of neutrinos pass through you every second.",source:"Fermilab",url:"#",category:"Science",likes:201},
+{id:25,fact:"It rains diamonds on Jupiter and Saturn.",source:"JPL NASA",url:"#",category:"Science",likes:367},
+{id:26,fact:"The universe's average color is called 'cosmic latte'.",source:"Johns Hopkins",url:"#",category:"Science",likes:178},
+{id:27,fact:"Quantum entanglement links particles instantly across distance.",source:"Nature Physics",url:"#",category:"Science",likes:256},
+{id:28,fact:"Your brain generates about 20 watts—enough for a dim bulb.",source:"Scientific American",url:"#",category:"Science",likes:312},
+{id:29,fact:"Absolute zero is -273.15°C where atoms stop moving.",source:"NIST",url:"#",category:"Science",likes:165},
+{id:30,fact:"Glass is an amorphous solid that flows over centuries.",source:"MIT",url:"#",category:"Science",likes:143},
+{id:31,fact:"Superfluid helium can climb walls, defying gravity.",source:"Physics",url:"#",category:"Science",likes:198},
+{id:32,fact:"Earth's core holds enough gold to coat the planet knee-deep.",source:"USGS",url:"#",category:"Science",likes:276},
+{id:33,fact:"Sound travels 4.3x faster in water than in air.",source:"NOAA",url:"#",category:"Science",likes:154},
+{id:34,fact:"You age slower at sea level than on a mountain.",source:"Einstein Theory",url:"#",category:"Science",likes:211},
+{id:35,fact:"Cleopatra lived closer to the iPhone than to the pyramids' building.",source:"History.com",url:"#",category:"History",likes:523,img:"https://picsum.photos/id/12/800/1200"},
+{id:36,fact:"The Great Wall isn't visible from space with naked eye.",source:"NASA",url:"#",category:"History",likes:298},
+{id:37,fact:"Oxford University started in 1096—before the Aztec Empire.",source:"Oxford",url:"#",category:"History",likes:267},
+{id:38,fact:"WWI soldiers held a Christmas truce in 1914 to play football.",source:"Imperial War Museum",url:"#",category:"History",likes:412},
+{id:39,fact:"The shortest war lasted 38 minutes: Britain vs Zanzibar 1896.",source:"Guinness",url:"#",category:"History",likes:345},
+{id:40,fact:"Vikings used sunstones to navigate cloudy seas.",source:"Nature",url:"#",category:"History",likes:234},
+{id:41,fact:"Romans used urine as mouthwash for its ammonia.",source:"Smithsonian",url:"#",category:"History",likes:189},
+{id:42,fact:"The Library of Alexandria held up to 400,000 scrolls.",source:"UNESCO",url:"#",category:"History",likes:276},
+{id:43,fact:"Napoleon was once attacked by hundreds of rabbits.",source:"History Extra",url:"#",category:"History",likes:198},
+{id:44,fact:"Ada Lovelace wrote the first computer program in 1843.",source:"Computer History Museum",url:"#",category:"History",likes:367},
+{id:45,fact:"Nintendo was founded in 1889 while samurai still existed.",source:"Nintendo",url:"#",category:"History",likes:312},
+{id:46,fact:"The Eiffel Tower was originally offered to Barcelona.",source:"Tour Eiffel",url:"#",category:"History",likes:221},
+{id:47,fact:"Egyptians shaved eyebrows to mourn dead cats.",source:"British Museum",url:"#",category:"History",likes:176},
+{id:48,fact:"The US flag has been redesigned 27 times.",source:"Smithsonian",url:"#",category:"History",likes:154},
+{id:49,fact:"Julius Caesar was stabbed 23 times on the Ides of March.",source:"Livy",url:"#",category:"History",likes:298},
+{id:50,fact:"The fax machine was patented in 1843, before phones.",source:"IEEE",url:"#",category:"History",likes:201},
+{id:51,fact:"Greek fire's formula remains lost to history.",source:"Byzantine Studies",url:"#",category:"History",likes:187},
+{id:52,fact:"Japan's Tashirojima island has more cats than people.",source:"Japan Travel",url:"#",category:"Culture",likes:445,img:"https://picsum.photos/id/40/800/1200"},
+{id:53,fact:"Icelanders give books on Christmas Eve for Jolabokaflod.",source:"Iceland Review",url:"#",category:"Culture",likes:312},
+{id:54,fact:"Ethiopia follows a 13-month calendar—it's currently 2016 there.",source:"BBC",url:"#",category:"Culture",likes:389},
+{id:55,fact:"In Korea, babies are 1 at birth by traditional age counting.",source:"Korea Times",url:"#",category:"Culture",likes:256},
+{id:56,fact:"Finland has more saunas than cars—3.3 million.",source:"Visit Finland",url:"#",category:"Culture",likes:234},
+{id:57,fact:"Bhutan measures Gross National Happiness, not GDP.",source:"UN",url:"#",category:"Culture",likes:367},
+{id:58,fact:"Spain's La Tomatina throws 150 tons of tomatoes yearly.",source:"Guinness",url:"#",category:"Culture",likes:298},
+{id:59,fact:"China's 2010 traffic jam lasted 12 days, 100km long.",source:"BBC",url:"#",category:"Culture",likes:211},
+{id:60,fact:"Mexico City sinks about 50cm per year.",source:"Nature Geoscience",url:"#",category:"Culture",likes:187},
+{id:61,fact:"In Denmark, flagging at dinner is rude unless it's a birthday.",source:"Culture Trip",url:"#",category:"Culture",likes:143},
+{id:62,fact:"Rio Carnival attracts over 2 million people daily.",source:"Rio Tourism",url:"#",category:"Culture",likes:324},
+{id:63,fact:"Inuit languages have dozens of words for snow conditions.",source:"Linguistics",url:"#",category:"Culture",likes:198},
+{id:64,fact:"Saudi Arabia imports sand and camels from Australia.",source:"Reuters",url:"#",category:"Culture",likes:267},
+{id:65,fact:"Venice is built on 118 islands with 400+ bridges, no cars.",source:"UNESCO",url:"#",category:"Culture",likes:345},
+{id:66,fact:"Tulips originated in Turkey, not the Netherlands.",source:"Kew",url:"#",category:"Culture",likes:221},
+{id:67,fact:"India's City Montessori School has 55,000+ students.",source:"Guinness",url:"#",category:"Culture",likes:189},
+{id:68,fact:"New Zealand has 5 sheep for every person.",source:"Stats NZ",url:"#",category:"Culture",likes:298},
+{id:69,fact:"Nigeria has over 500 languages spoken across ethnic groups.",source:"Ethnologue",url:"#",category:"Nigeria",likes:512,img:"https://picsum.photos/id/1015/800/1200"},
+{id:70,fact:"Lagos was originally called Eko by the Awori.",source:"History",url:"#",category:"Nigeria",likes:334},
+{id:71,fact:"Nollywood is the world's 2nd largest film industry by output.",source:"UNESCO",url:"#",category:"Nigeria",likes:467},
+{id:72,fact:"Nollywood employs over 1 million people.",source:"PwC",url:"#",category:"Nigeria",likes:298},
+{id:73,fact:"The Nok culture made terracotta sculptures from 500 BCE.",source:"British Museum",url:"#",category:"Nigeria",likes:221},
+{id:74,fact:"Nigeria is Africa's largest economy by GDP.",source:"World Bank",url:"#",category:"Nigeria",likes:345},
+{id:75,fact:"Kano's ancient walls stretch 14km, built in 11th century.",source:"UNESCO",url:"#",category:"Nigeria",likes:189},
+{id:76,fact:"Nigerian jollof rice sparks friendly West African rivalries.",source:"Culture",url:"#",category:"Nigeria",likes:412},
+{id:77,fact:"Nigeria's Eagles won Olympic football gold in 1996.",source:"FIFA",url:"#",category:"Nigeria",likes:378},
+{id:78,fact:"The Niger River gives Nigeria its name.",source:"Geography",url:"#",category:"Nigeria",likes:256},
+{id:79,fact:"Abuja became capital in 1991, replacing Lagos.",source:"Government",url:"#",category:"Nigeria",likes:198},
+{id:80,fact:"Nigeria has over 220 million people, Africa's most populous.",source:"UN",url:"#",category:"Nigeria",likes:423},
+{id:81,fact:"Afrobeats originated from Nigeria and Ghana in 2000s.",source:"Music",url:"#",category:"Nigeria",likes:367},
+{id:82,fact:"Lekki Conservation Centre has Africa's longest canopy walk at 401m.",source:"NCF",url:"#",category:"Nigeria",likes:267},
+{id:83,fact:"Zuma Rock rises 725m and appears on the 100 naira note.",source:"Tourism",url:"#",category:"Nigeria",likes:212},
+{id:84,fact:"Ibadan hosted Africa's first TV broadcast in 1959.",source:"NTA",url:"#",category:"Nigeria",likes:234},
+{id:85,fact:"The first computer bug was a real moth found in 1947.",source:"Harvard",url:"#",category:"Tech",likes:445,img:"https://picsum.photos/id/0/800/1200"},
+{id:86,fact:"QWERTY was designed to slow typists and prevent jams.",source:"Smithsonian",url:"#",category:"Tech",likes:298},
+{id:87,fact:"Over 1.3 million apps exist on Google Play.",source:"Statista",url:"#",category:"Tech",likes:212},
+{id:88,fact:"The first website info.cern.ch is still online.",source:"CERN",url:"#",category:"Tech",likes:367},
+{id:89,fact:"CAPTCHA means Completely Automated Public Turing test.",source:"CMU",url:"#",category:"Tech",likes:187},
+{id:90,fact:"More people own phones than have access to toilets.",source:"UN",url:"#",category:"Tech",likes:324},
+{id:91,fact:"Windows was originally named 'Interface Manager'.",source:"Microsoft",url:"#",category:"Tech",likes:198},
+{id:92,fact:"Email was invented in 1971, before the web.",source:"Internet Hall of Fame",url:"#",category:"Tech",likes:267},
+{id:93,fact:"First YouTube video 'Me at the zoo' was uploaded 2005.",source:"YouTube",url:"#",category:"Tech",likes:412},
+{id:94,fact:"AlphaGo beat world Go champion in 2016.",source:"DeepMind",url:"#",category:"Tech",likes:345},
+{id:95,fact:"'123456' remains the most used password worldwide.",source:"NordPass",url:"#",category:"Tech",likes:289},
+{id:96,fact:"The internet's active electrons weigh about as much as a strawberry.",source:"Vsauce",url:"#",category:"Tech",likes:221},
+{id:97,fact:"Nintendo started in 1889 making hanafuda playing cards.",source:"Nintendo",url:"#",category:"Tech",likes:276},
+{id:98,fact:"GPS satellites correct for relativity 38 microseconds daily.",source:"NASA",url:"#",category:"Tech",likes:234},
+{id:99,fact:"Bluetooth is named after Viking king Harald Bluetooth.",source:"Bluetooth SIG",url:"#",category:"Tech",likes:312},
+{id:100,fact:"The first emoji was created in Japan in 1999 by Shigetaka Kurita.",source:"MoMA",url:"#",category:"Tech",likes:378}
+];
+
+  const NIGERIA_SAMPLE_ADS = [
+    {id:"jumia1", title:"Jumia Nigeria", subtitle:"Sponsored — Shop phones & gadgets", img:"", link:"https://www.jumia.com.ng/your-affiliate-link"},
+    {id:"flutterwave1", title:"Flutterwave", subtitle:"Sponsored — Accept payments globally", img:"", link:"https://flutterwave.com/your-ref"},
+    {id:"paystack1", title:"Paystack", subtitle:"Sponsored — Grow your business online", img:"", link:"https://paystack.com/your-ref"},
+    {id:"konga1", title:"Konga", subtitle:"Sponsored — Everyday deals", img:"", link:"https://konga.com/your-affiliate"},
+    {id:"carbon1", title:"Carbon", subtitle:"Sponsored — Instant loans & payments", img:"", link:"https://getcarbon.co/your-ref"}
+  ];
+
+  const $ = s => document.querySelector(s);
+  const shuffle = a => { for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a };
+  const escapeHtml = s => String(s).replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+
+  const ADMIN_PASSWORD = 'flkr2026';
+
+  let custom = null;
+  try{ custom = JSON.parse(localStorage.getItem('flkr_custom_facts')||'null') }catch{}
+  const baseFacts = Array.isArray(custom) && custom.length ? custom : DEFAULT_FACTS;
+  const facts = shuffle([...baseFacts]);
+
+  // seed Nigeria ads on first load
+  if(!localStorage.getItem('flkr_custom_ads')){
+    try{ localStorage.setItem('flkr_custom_ads', JSON.stringify(NIGERIA_SAMPLE_ADS)) }catch{}
+  }
+
+  let customAds = null;
+  try{ customAds = JSON.parse(localStorage.getItem('flkr_custom_ads')||'null') }catch{}
+  const ads = Array.isArray(customAds) && customAds.length ? customAds : NIGERIA_SAMPLE_ADS;
+
+  let liked = JSON.parse(localStorage.getItem('flkr_liked')||'[]');
+  let pinned = JSON.parse(localStorage.getItem('flkr_pinned')||'[]');
+
+  const today = new Date().toISOString().slice(0,10);
+  let dailyData = JSON.parse(localStorage.getItem('flkr_daily')||'{}');
+  if(dailyData.date !== today) dailyData = {date:today, count:0, viewed:[]};
+  const viewedSet = new Set(dailyData.viewed||[]);
+  const saveDaily = () => localStorage.setItem('flkr_daily', JSON.stringify({date:today, count:dailyData.count, viewed:[...viewedSet]}));
+
+  let currentView = 'feed', currentCat = 'All', searchQuery = '';
+
+  const feedEl = $('#feed');
+  const likedCountEl = $('#likedCount');
+  const dailyEl = $('#daily');
+
+  function updateCounts(){
+    likedCountEl.textContent = liked.length;
+    dailyEl.textContent = `${dailyData.count} today`;
+  }
+  updateCounts();
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const card = entry.target;
+        const img = card.querySelector('img[data-src]');
+        if(img){
+          img.src = img.dataset.src;
+          img.onload = () => {
+            card.classList.add('loaded');
+            if('caches' in window){
+              caches.open('flkr-v9').then(c=>c.add(img.src).catch(()=>{}));
+            }
+          };
+          img.removeAttribute('data-src');
+        }
+        const id = +card.dataset.id;
+        if(id && !viewedSet.has(id)){
+          viewedSet.add(id); dailyData.count++; saveDaily(); updateCounts();
+          if(navigator.vibrate) navigator.vibrate(1);
+        }
+        observer.unobserve(card);
+      }
+    });
+  }, {rootMargin:'200px 0px'});
+
+  function getFacts(){
+    let list = currentView==='feed' ? facts : facts.filter(f=>liked.includes(f.id));
+    if(currentView==='liked'){
+      list = list.sort((a,b)=> (pinned.includes(b.id)?1:0) - (pinned.includes(a.id)?1:0));
+    }
+    if(currentCat!=='All') list = list.filter(f=>f.category===currentCat);
+    if(searchQuery) list = list.filter(f=> (f.fact+' '+f.source+' '+(f.category||'')).toLowerCase().includes(searchQuery));
+    return list;
+  }
+
+  function toast(msg){
+    const t=document.createElement('div'); t.className='toast'; t.textContent=msg;
+    document.body.appendChild(t); setTimeout(()=>t.classList.add('show'),10);
+    setTimeout(()=>{t.classList.remove('show'); setTimeout(()=>t.remove(),200)},1800);
+  }
+
+  function toggleLike(id, btn){
+    const i = liked.indexOf(id);
+    if(i>-1) liked.splice(i,1); else liked.push(id);
+    localStorage.setItem('flkr_liked', JSON.stringify(liked));
+    const isLiked = i===-1;
+    if(btn){
+      btn.classList.toggle('active', isLiked);
+      btn.querySelector('.heart').textContent = isLiked ? '♥' : '♡';
+      const f = facts.find(x=>x.id===id);
+      btn.querySelector('em').textContent = (f.likes||0) + (isLiked?1:0);
+    }
+    updateCounts();
+    if(navigator.vibrate) navigator.vibrate(12);
+    if(currentView==='liked') render();
+  }
+
+  function togglePin(id, btn){
+    const i = pinned.indexOf(id);
+    if(i>-1){ pinned.splice(i,1); btn.classList.remove('active'); }
+    else{
+      if(pinned.length>=3){ toast('Max 3 pins'); if(navigator.vibrate) navigator.vibrate([20,30]); return }
+      pinned.push(id); btn.classList.add('active'); if(navigator.vibrate) navigator.vibrate(15);
+    }
+    localStorage.setItem('flkr_pinned', JSON.stringify(pinned));
+    render();
+  }
+
+  function shareFact(f){
+    const url = location.origin + location.pathname + '#' + f.id;
+    const text = `${f.fact} — via flkr`;
+    if(navigator.share){ navigator.share({title:'flkr', text, url}).catch(()=>{}) }
+    else { navigator.clipboard.writeText(text + ' ' + url); toast('Link copied') }
+    if(navigator.vibrate) navigator.vibrate(8);
+  }
+
+  function createCard(f){
+    const card = document.createElement('article');
+    card.className = 'card'; card.dataset.id = f.id;
+    const imgUrl = f.img && f.img.trim() ? f.img : `https://picsum.photos/id/${(f.id*7)%1084}/800/1200`;
+    const isLiked = liked.includes(f.id);
+    card.innerHTML = `
+      <div class="shimmer"></div>
+      <img loading="lazy" data-src="${imgUrl}" alt="${escapeHtml(f.fact.slice(0,120))}" draggable="false">
+      <div class="scrim"></div>
+      <button class="flag" aria-label="Report">⚐</button>
+      ${currentView==='liked'?`<button class="pin ${pinned.includes(f.id)?'active':''}" aria-label="Pin">📌</button>`:''}
+      <div class="fact-wrap">
+        <p class="fact">${f.fact}</p>
+        <a class="source" href="${f.url||'#'}" target="_blank" rel="noopener">${f.source||'Source'} • ${f.category}</a>
+      </div>
+      <div class="actions">
+        <button class="like ${isLiked?'active':''}" aria-label="Like"><span class="heart">${isLiked?'♥':'♡'}</span> <em>${(f.likes||0)+(isLiked?1:0)}</em></button>
+        <button class="share" aria-label="Share">↗</button>
+      </div>
+    `;
+    const likeBtn = card.querySelector('.like');
+    likeBtn.onclick = e => { e.stopPropagation(); toggleLike(f.id, likeBtn) };
+    card.querySelector('.share').onclick = e => { e.stopPropagation(); shareFact(f) };
+    card.querySelector('.flag').onclick = e => { e.stopPropagation(); location.href = `mailto:hello@flkr.app?subject=Report fact #${f.id}&body=${encodeURIComponent(f.fact)}` };
+    if(currentView==='liked') card.querySelector('.pin').onclick = e => { e.stopPropagation(); togglePin(f.id, e.currentTarget) };
+
+    let pressTimer, moved=false, sx=0, sy=0;
+    const start = e => { moved=false; const p=e.touches?e.touches[0]:e; sx=p.clientX; sy=p.clientY; pressTimer=setTimeout(()=>{ if(!moved){ navigator.clipboard.writeText(f.fact); toast('Fact copied'); if(navigator.vibrate) navigator.vibrate(20) } },600) };
+    const cancel = ()=> clearTimeout(pressTimer);
+    const move = e => { const p=e.touches?e.touches[0]:e; if(Math.abs(p.clientX-sx)>10||Math.abs(p.clientY-sy)>10) moved=true };
+    card.addEventListener('pointerdown', start); card.addEventListener('pointerup', cancel); card.addEventListener('pointerleave', cancel); card.addEventListener('pointermove', move);
+
+    let tx=0, ty=0;
+    card.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; ty=e.touches[0].clientY }, {passive:true});
+    card.addEventListener('touchend', e=>{
+      const dx = e.changedTouches[0].clientX - tx;
+      const dy = e.changedTouches[0].clientY - ty;
+      if(Math.abs(dx)>80 && Math.abs(dy)<60){
+        if(dx>0){ toggleLike(f.id, likeBtn); if(navigator.vibrate) navigator.vibrate([10,20,10]) }
+        else { shareFact(f); if(navigator.vibrate) navigator.vibrate(10) }
+      }
+    });
+
+    observer.observe(card);
+    return card;
+  }
+
+  function createAdCard(ad){
+    const card = document.createElement('article');
+    card.className = 'card ad';
+    card.dataset.ad = ad.id;
+    const hasImg = ad.img && ad.img.trim();
+    card.innerHTML = `
+      ${hasImg ? `<div class="shimmer"></div><img loading="lazy" data-src="${ad.img}" alt="${escapeHtml(ad.title||'Sponsored')}" draggable="false"><div class="scrim" style="background:linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.35) 50%, transparent)"></div>` : ''}
+      <div class="ad-inner">
+        <span>SPONSORED</span>
+        <h3>${escapeHtml(ad.title||'Sponsored')}</h3>
+        <p>${escapeHtml(ad.subtitle||'')}</p>
+      </div>
+    `;
+    if(ad.link){
+      card.style.cursor='pointer';
+      card.onclick = ()=> window.open(ad.link, '_blank', 'noopener');
+    }
+    if(hasImg) observer.observe(card);
+    return card;
+  }
+
+  function render(){
+    feedEl.innerHTML = '';
+    const list = getFacts();
+
+    if(currentView==='liked'){
+      const bar = document.createElement('div');
+      bar.className = 'toolbar';
+      bar.innerHTML = `<div>${list.length} liked • ${pinned.length}/3 pinned</div><button id="exportBtn">Export</button>`;
+      feedEl.appendChild(bar);
+      bar.querySelector('#exportBtn').onclick = () => {
+        const likedFacts = facts.filter(f=>liked.includes(f.id)).map(({id,fact,source,url,category})=>({id,fact,source,url,category}));
+        const blob = new Blob([JSON.stringify(likedFacts,null,2)], {type:'application/json'});
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'flkr-liked.json'; a.click();
+        toast('Exported liked facts');
+      };
+    }
+
+    if(!list.length){
+      feedEl.innerHTML += `<div class="empty">${currentView==='liked'?'No liked facts yet. Tap ♥ on feed.':'No facts found.'}</div>`;
+      return;
+    }
+
+    let adIndex = 0;
+    list.forEach((f,i)=>{
+      feedEl.appendChild(createCard(f));
+      if(currentView==='feed' && (i+1)%5===0){
+        const adData = ads[adIndex % ads.length];
+        adIndex++;
+        const ad = createAdCard(adData);
+        feedEl.appendChild(ad);
+      }
+    });
+
+    if(location.hash){
+      const el = feedEl.querySelector(`[data-id="${location.hash.slice(1)}"]`);
+      if(el) setTimeout(()=>el.scrollIntoView({behavior:'smooth', block:'center'}), 250);
+    }
+  }
+
+  $('#heartToggle').onclick = () => {
+    currentView = currentView==='feed' ? 'liked' : 'feed';
+    $('#heartToggle').classList.toggle('active', currentView==='liked');
+    document.body.dataset.view = currentView;
+    render();
+  };
+
+  document.querySelectorAll('.chip').forEach(ch=>{
+    ch.onclick = () => {
+      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      ch.classList.add('active'); currentCat = ch.dataset.cat; render();
+    };
+  });
+
+  const searchBtn = $('#searchBtn'), searchBar = $('#searchBar'), searchInput = $('#searchInput');
+  searchBtn.onclick = () => { searchBar.hidden = !searchBar.hidden; if(!searchBar.hidden) searchInput.focus() };
+  searchInput.oninput = () => { searchQuery = searchInput.value.toLowerCase().trim(); render() };
+
+  // admin
+  const adminLink = $('#adminLink'), modal = $('#adminModal'), txt = $('#adminJson'), adsTxt = $('#adminAdsJson');
+  const passwordModal = $('#passwordModal');
+  const adminPassword = $('#adminPassword');
+  const passwordSubmit = $('#passwordSubmit');
+  const attemptsHint = $('#attemptsHint');
+  const adminCounts = $('#adminCounts');
+
+  let failedAttempts = parseInt(localStorage.getItem('flkr_admin_fails') || '0');
+  let lockoutUntil = parseInt(localStorage.getItem('flkr_admin_lock') || '0');
+
+  function isAdminLocked(){ return Date.now() < lockoutUntil }
+
+  function updateAdminLockUI(){
+    if(!isAdminLocked()) return;
+    adminLink.style.opacity = '0.3';
+    adminLink.style.pointerEvents = 'none';
+    const interval = setInterval(()=>{
+      const remaining = Math.ceil((lockoutUntil - Date.now())/1000);
+      if(remaining <= 0){
+        clearInterval(interval);
+        adminLink.style.opacity = '';
+        adminLink.style.pointerEvents = '';
+        adminLink.textContent = 'admin';
+        localStorage.removeItem('flkr_admin_fails');
+        localStorage.removeItem('flkr_admin_lock');
+        failedAttempts = 0;
+        lockoutUntil = 0;
+      } else {
+        adminLink.textContent = `locked ${remaining}s`;
+      }
+    }, 500);
+    adminLink.textContent = `locked ${Math.ceil((lockoutUntil - Date.now())/1000)}s`;
+  }
+  updateAdminLockUI();
+
+  function updateAdminCounts(){
+    let fc=0, ac=0;
+    try{ const f=JSON.parse(txt.value); fc=Array.isArray(f)?f.length:0 }catch{}
+    try{ const a=JSON.parse(adsTxt.value); ac=Array.isArray(a)?a.length:0 }catch{}
+    adminCounts.textContent = `${fc} facts, ${ac} ads loaded`;
+  }
+  txt.addEventListener('input', updateAdminCounts);
+  adsTxt.addEventListener('input', updateAdminCounts);
+
+  const addAdBtn = $('#addAdBtn');
+  const removeAdBtn = $('#removeAdBtn');
+  const resetNigeriaAds = $('#resetNigeriaAds');
+  const getAdsFromEditor = ()=>{ try{ return JSON.parse(adsTxt.value||'[]') }catch{ return null } };
+
+  if(addAdBtn) addAdBtn.onclick = ()=>{
+    let arr = getAdsFromEditor();
+    if(!Array.isArray(arr)){ toast('Fix JSON first'); return }
+    arr.push({id:'ad'+Date.now(), title:'New Sponsor', subtitle:'Sponsored — Edit me', img:'', link:'https://example.com/your-link'});
+    adsTxt.value = JSON.stringify(arr, null, 2);
+    updateAdminCounts();
+    toast('Ad added');
+  };
+  if(removeAdBtn) removeAdBtn.onclick = ()=>{
+    let arr = getAdsFromEditor();
+    if(!Array.isArray(arr) || !arr.length){ toast('No ads to remove'); return }
+    arr.pop();
+    adsTxt.value = JSON.stringify(arr, null, 2);
+    updateAdminCounts();
+    toast('Removed last');
+  };
+  if(resetNigeriaAds) resetNigeriaAds.onclick = ()=>{
+    adsTxt.value = JSON.stringify(NIGERIA_SAMPLE_ADS, null, 2);
+    updateAdminCounts();
+    toast('Nigeria samples loaded');
+  };
+
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.onclick = ()=>{
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.admin-pane').forEach(p=>p.classList.remove('active'));
+      document.getElementById(btn.dataset.tab+'Pane').classList.add('active');
+    }
+  });
+
+  adminLink.onclick = e => {
+    e.preventDefault();
+    if(isAdminLocked()){
+      const remaining = Math.ceil((lockoutUntil - Date.now())/1000);
+      toast(`Admin locked. Try in ${remaining}s`);
+      return;
+    }
+    attemptsHint.textContent = failedAttempts ? `${3 - failedAttempts} attempts remaining` : '';
+    attemptsHint.style.color = 'var(--muted)';
+    adminPassword.value = '';
+    passwordModal.showModal();
+    setTimeout(()=>adminPassword.focus(), 50);
+  };
+
+  function handlePasswordSubmit(){
+    const val = adminPassword.value;
+    if(val === ADMIN_PASSWORD){
+      failedAttempts = 0;
+      localStorage.removeItem('flkr_admin_fails');
+      localStorage.removeItem('flkr_admin_lock');
+      passwordModal.close();
+      txt.value = JSON.stringify(baseFacts, null, 2);
+      adsTxt.value = JSON.stringify(ads, null, 2);
+      updateAdminCounts();
+      modal.showModal();
+      toast('Admin unlocked');
+      if(navigator.vibrate) navigator.vibrate(10);
+    } else {
+      failedAttempts++;
+      localStorage.setItem('flkr_admin_fails', failedAttempts);
+      toast('Incorrect password');
+      if(navigator.vibrate) navigator.vibrate([20,30]);
+      adminPassword.value = '';
+      adminPassword.focus();
+      if(failedAttempts >= 3){
+        lockoutUntil = Date.now() + 60000;
+        localStorage.setItem('flkr_admin_lock', lockoutUntil);
+        passwordModal.close();
+        toast('Too many attempts. Locked for 60s');
+        updateAdminLockUI();
+      } else {
+        attemptsHint.textContent = `${3 - failedAttempts} attempts remaining`;
+        attemptsHint.style.color = '#ffb8c6';
+      }
+    }
+  }
+
+  passwordSubmit.onclick = handlePasswordSubmit;
+  adminPassword.onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); handlePasswordSubmit(); } };
+
+  $('#saveAdmin').onclick = () => {
+    try{
+      const parsedFacts = JSON.parse(txt.value);
+      if(!Array.isArray(parsedFacts)) throw new Error('Facts must be an array');
+      const parsedAds = JSON.parse(adsTxt.value);
+      if(!Array.isArray(parsedAds)) throw new Error('Ads must be an array');
+      parsedAds.forEach((ad,i)=>{ if(!ad.id || !ad.title) throw new Error(`Ad #${i+1} missing id or title`) });
+      localStorage.setItem('flkr_custom_facts', JSON.stringify(parsedFacts));
+      localStorage.setItem('flkr_custom_ads', JSON.stringify(parsedAds));
+      toast('Saved — reloading'); setTimeout(()=>location.reload(), 600);
+    }catch(err){ alert('Invalid JSON: '+err.message) }
+  };
+  $('#resetAdmin').onclick = () => { 
+    localStorage.removeItem('flkr_custom_facts'); 
+    localStorage.removeItem('flkr_custom_ads'); 
+    toast('Reset — reloading'); 
+    setTimeout(()=>location.reload(), 600) 
+  };
+
+  render();
+
+  if(location.hash){
+    const id = +location.hash.slice(1);
+    const idx = facts.findIndex(f=>f.id===id);
+    if(idx>0){ const [item]=facts.splice(idx,1); facts.unshift(item); render() }
+  }
+})();
+</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>
